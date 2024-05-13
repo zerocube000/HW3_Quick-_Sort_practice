@@ -2,32 +2,30 @@
 
 ### code
 ```
-word_freq = {}
-word_repeat = []
-repeat = False
+def Quick_Sort(array, start, end):
+    if start >= end:
+        return
+    pivot = array[start]
+    left = start
+    right = end
+    while left < right:
+        while left < right and array[right] >= pivot:
+            right -= 1
+        while left < right and array[left] <= pivot:
+            left += 1
+        if left < right:
+            array[left], array[right] = array[right], array[left]
+    array[start], array[right] = array[right], array[start]
+    print("以", pivot, "為基準點排列陣列排列結果:", array)
+    Quick_Sort(array, start, right - 1)
+    Quick_Sort(array, right + 1, end)
 
-with open("/content/drive/MyDrive/hw2_data.txt", "r") as data:
-  words = data.read().split()
 
-for word in words :
-    if word in word_freq:
-        word_freq[word] += 1
-    else:
-        word_freq[word] = 1
+arr = [33, 67, 8, 13, 54, 119, 3, 84, 25, 41]
+print("原先陣列:", arr, "\n")
+Quick_Sort(arr, 0, len(arr) - 1)
+print("\n最終陣列:", arr)
 
-for word in words:
-  if word_freq[word] == 1:
-    word_repeat.append(word)
-    repeat = True
-
-if repeat == False:
-  print("1.沒有單字重複")
-else:
-  print("1.沒有重複的單字是",",".join(word_repeat))
-
-print("2.每個單字重複的次數：")
-for word,freq in word_freq.items():
-  print(" ", word, "重複", freq, "次")
 ```
 
 ### 執行結果  
